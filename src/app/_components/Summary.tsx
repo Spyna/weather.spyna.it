@@ -3,59 +3,60 @@ import WindSection from "./WindSection";
 import Condition from "./Condition";
 import umbrella from "./umbrella.svg";
 import Image from "next/image";
+import { Weather } from "../service/weatherData";
 
 interface Props {
-  response: any;
+  weather: Weather;
 }
 
-export default function Summary({ response }: Readonly<Props>) {
+export default function Summary({ weather }: Readonly<Props>) {
   return (
     <section className="mb-4 shadow p-2">
       <span className="text-white">
-        {dayjs(response.location.localtime).format("dddd, MMMM D, YYYY")}
+        {dayjs(weather.location.localtime).format("dddd, MMMM D, YYYY")}
       </span>
       <div className="flex text-white items-center justify-around my-5">
         <div className="p-2 shadow w-1/2">
           <div>
             <p className="mb-3">
               <small>
-                Max {response.forecast.forecastday[0].day.maxtemp_c}&deg; -{" "}
+                Max {weather.forecast.forecastday[0].day.maxtemp_c}&deg; -{" "}
                 <span className="">
-                  Min {response.forecast.forecastday[0].day.mintemp_c}&deg;
+                  Min {weather.forecast.forecastday[0].day.mintemp_c}&deg;
                 </span>
               </small>
             </p>
-            <span className="text-7xl">{response.current.temp_c}&deg;</span>
+            <span className="text-7xl">{weather.current.temp_c}&deg;</span>
             <span className="text-3xl -mt-7 inline-block">C</span>
           </div>
-          <small>Feels like {response.current.feelslike_c}&deg;</small>
+          <small>Feels like {weather.current.feelslike_c}&deg;</small>
         </div>
         <div className="text-center m-1">
           <div className="p-2 shadow">
             <Condition
-              icon={response.current.condition.icon}
-              text={response.current.condition.text}
+              icon={weather.current.condition.icon}
+              text={weather.current.condition.text}
             />
           </div>
           <div className="my-2 p-2 shadow">
             Day
             <div className="flex items-center">
               <img
-                src={response.forecast.forecastday[0].day.condition.icon}
-                alt={response.forecast.forecastday[0].day.condition.text}
+                src={weather.forecast.forecastday[0].day.condition.icon}
+                alt={weather.forecast.forecastday[0].day.condition.text}
                 width={64}
                 height={64}
               />
-              <span>{response.forecast.forecastday[0].day.condition.text}</span>
+              <span>{weather.forecast.forecastday[0].day.condition.text}</span>
             </div>
           </div>
         </div>
       </div>
       <div className="flex">
         <WindSection
-          speed={response.current.wind_kph}
-          direction={response.current.wind_dir}
-          degree={response.current.wind_degree}
+          speed={weather.current.wind_kph}
+          direction={weather.current.wind_dir}
+          degree={weather.current.wind_degree}
         />
         <div className="p-2 shadow m-1">
           <Image
@@ -63,9 +64,9 @@ export default function Summary({ response }: Readonly<Props>) {
             src={umbrella}
             width={60}
             height={60}
-            alt={`chance of raining: ${response.forecast.forecastday[0].day.daily_chance_of_rain}%`}
+            alt={`chance of raining: ${weather.forecast.forecastday[0].day.daily_chance_of_rain}%`}
           />{" "}
-          {response.forecast.forecastday[0].day.daily_chance_of_rain}%
+          {weather.forecast.forecastday[0].day.daily_chance_of_rain}%
         </div>
       </div>
     </section>

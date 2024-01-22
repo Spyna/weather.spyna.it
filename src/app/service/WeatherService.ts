@@ -1,8 +1,9 @@
 import { makeObservable, observable, runInAction } from "mobx";
+import { Weather } from "./weatherData";
 
 class WeatherService {
   location: string = "";
-  weatherData: any = null;
+  weatherData: Weather | null = null;
   loading: boolean = false;
 
   constructor() {

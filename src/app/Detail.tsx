@@ -1,16 +1,17 @@
 import dayjs from "dayjs";
 import Condition from "./_components/Condition";
 import WindSection from "./_components/WindSection";
+import { Weather } from "./service/weatherData";
 
 interface Props {
-  response: any;
+  weather: Weather;
 }
-export default function Detail({ response }: Readonly<Props>) {
+export default function Detail({ weather }: Readonly<Props>) {
   return (
     <section className="p-2 shadow">
       <h2 className="text-xl font-semibold">Hourly</h2>
       <div className="overflow-x-auto flex">
-        {response.forecast.forecastday[0].hour.map((hour: any) => (
+        {weather.forecast.forecastday[0].hour.map((hour: any) => (
           <div
             key={hour.time_epoch}
             className="shadow min-w-28 m-1 text-center"
