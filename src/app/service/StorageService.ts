@@ -33,7 +33,7 @@ class StorageService {
 
   private getLatestLocations() {
     runInAction(() => {
-      this.locations = this.store.get("locations", "[]");
+      this.locations = this.store.get("locations", "[]") || [];
     });
   }
 
