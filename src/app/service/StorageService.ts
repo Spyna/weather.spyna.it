@@ -28,7 +28,7 @@ class StorageService {
       }
       this.locations = [...temp];
     });
-    this.store.save("locations", JSON.stringify(this.locations));
+    this.store.save("locations", this.locations);
   }
 
   private getLatestLocations() {
@@ -44,7 +44,7 @@ class StorageService {
       }
       this.locations = [{ location, default: false }, ...this.locations];
     });
-    this.store.save("locations", JSON.stringify(this.locations));
+    this.store.save("locations", this.locations);
   }
 }
 
