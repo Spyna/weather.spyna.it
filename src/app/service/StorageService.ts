@@ -7,6 +7,7 @@ interface Location {
 
 class StorageService {
   locations: Location[] = [];
+  private store = new Store();
   constructor() {
     makeObservable(this, {
       locations: observable,
@@ -27,12 +28,12 @@ class StorageService {
       }
       this.locations = [...temp];
     });
-    localStorage.setItem("locations", JSON.stringify(this.locations));
+    this.store.save("locations", JSON.stringify(this.locations));
   }
 
   private getLatestLocations() {
     runInAction(() => {
-      this.locations = JSON.parse(localStorage.getItem("locations") ?? "[]");
+      this.locations = this.store.get("locations", "[]");
     });
   }
 
@@ -43,7 +44,20 @@ class StorageService {
       }
       this.locations = [{ location, default: false }, ...this.locations];
     });
-    localStorage.setItem("locations", JSON.stringify(this.locations));
+    this.store.save("locations", JSON.stringify(this.locations));
+  }
+}
+
+class Store {
+  save(key: string, value: any) {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  }
+  get(key: string, defaultValue: string = "null") {
+    if (typeof localStorage !== "undefined") {
+      return JSON.parse(localStorage.getItem(key) ?? defaultValue);
+    }
   }
 }
 
