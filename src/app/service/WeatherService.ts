@@ -26,12 +26,11 @@ class WeatherService {
       this.weatherData = null;
     });
     try {
-      const response = await fetch(`/api?query=${this.location}`);
+      const response = await fetch(`/api?query=${this.location}&days10&aqi=no&alerts=no`);
 
       const body = await response.json();
       runInAction(() => {
         this.weatherData = body;
-        console.log(this.weatherData);
       });
     } catch (error) {
     } finally {

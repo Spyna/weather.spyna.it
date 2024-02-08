@@ -11,12 +11,12 @@ interface Props {
 
 export default function Summary({ weather }: Readonly<Props>) {
   return (
-    <section className="mb-4 shadow p-2">
+    <section className="p-2 mb-4">
       <span className="text-white">
         {dayjs(weather.location.localtime).format("dddd, MMMM D, YYYY")}
       </span>
       <div className="flex text-white items-center justify-around my-5">
-        <div className="p-2 shadow w-1/2">
+        <div className="p-2 nm-concave-pink-700 rounded-lg m-2 w-1/2">
           <div>
             <p className="mb-3">
               <small>
@@ -32,13 +32,13 @@ export default function Summary({ weather }: Readonly<Props>) {
           <small>Feels like {weather.current.feelslike_c}&deg;</small>
         </div>
         <div className="text-center m-1">
-          <div className="p-2 shadow">
+          <div className="p-2 nm-concave-pink-700 rounded-lg m-2">
             <Condition
               icon={weather.current.condition.icon}
               text={weather.current.condition.text}
             />
           </div>
-          <div className="my-2 p-2 shadow">
+          <div className="my-2 p-2 nm-concave-pink-700 rounded-lg m-2">
             Day
             <div className="flex items-center">
               <img
@@ -58,7 +58,7 @@ export default function Summary({ weather }: Readonly<Props>) {
           direction={weather.current.wind_dir}
           degree={weather.current.wind_degree}
         />
-        <div className="p-2 shadow m-1">
+        <div className="p-2 nm-concave-pink-700 rounded-lg m-2 m-1">
           <Image
             className="inline-block"
             src={umbrella}

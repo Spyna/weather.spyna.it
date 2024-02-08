@@ -11,7 +11,7 @@ export async function GET(req: Request) {
   const query = searchParams.get("query");
 
   const { body } = await request(
-    `http://api.weatherapi.com/v1/forecast.json?q=${query}&key=${key}`,
+    `http://api.weatherapi.com/v1/forecast.json?q=${query}&key=${key}&days10&aqi=no&alerts=no`,
     {
       method: "GET",
     }

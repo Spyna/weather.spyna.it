@@ -45,7 +45,7 @@ export default observer(function Search() {
         </button>
         {/* <div
           id="dropdown"
-          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg nm-concave-pink-700 rounded-lg m-2 w-44 dark:bg-gray-700"
         >
           <ul
             className="py-2 text-sm text-gray-700 dark:text-gray-200"

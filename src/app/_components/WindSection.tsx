@@ -20,9 +20,8 @@ export default function WindSection({
   return (
     <div
       className={
-        "flex" +
-        (small ? "" : "  p-2 shadow m-1") +
-        (small && icon ? " flex-col items-center" : "")
+        "flex p-1" +
+        (small ? " items-center" : "  p-2 m-1 flex-col nm-concave-pink-700 rounded-lg") 
       }
     >
       {!small && (
@@ -31,21 +30,21 @@ export default function WindSection({
         </div>
       )}
       {small && icon && (
-        <Image src={windIcon} alt="Wind" width={16} height={16} />
+        <div className="mr-1">
+          <Image src={windIcon} alt="Wind" width={16} height={16} />
+        </div>
       )}
+      <div>{speed} km/h</div>
       <div className="m-1">
-        <div>{speed} km/h</div>
-        {degree && (
-          <div>
-            {degree} {direction}{" "}
-            <ArrowLongUpIcon
-              className="w-5 h-5 inline-block"
-              style={{
-                transform: `rotate(${180 - degree}deg)`,
-              }}
-            />{" "}
-          </div>
-        )}
+        <div>
+          {!small && <span>{direction} </span>}
+          <ArrowLongUpIcon
+            className="w-5 h-5 inline-block"
+            style={{
+              transform: `rotate(${180 - degree}deg)`,
+            }}
+          />{" "}
+        </div>
       </div>
     </div>
   );

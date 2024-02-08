@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 export default observer(function RecentLocations() {
   const { locations } = storageService;
   return (
-    <section className="p-4 bg-pink-800">
+    <section className="p-4 bg-pink-800 nm-concave-pink-700-sm">
       {locations.length === 0 && <div>Search a city</div>}
       {locations.length > 0 && (
         <div>
