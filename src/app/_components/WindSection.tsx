@@ -21,7 +21,9 @@ export default function WindSection({
     <div
       className={
         "flex p-1" +
-        (small ? " items-center" : "  p-2 m-1 flex-col nm-concave-pink-700 rounded-lg") 
+        (small
+          ? " items-center"
+          : "  p-2 m-1 flex-col nm-concave-pink-700 rounded-lg")
       }
     >
       {!small && (
@@ -38,12 +40,14 @@ export default function WindSection({
       <div className="m-1">
         <div>
           {!small && <span>{direction} </span>}
-          <ArrowLongUpIcon
-            className="w-5 h-5 inline-block"
-            style={{
-              transform: `rotate(${180 - degree}deg)`,
-            }}
-          />{" "}
+          {degree && (
+            <ArrowLongUpIcon
+              className="w-5 h-5 inline-block"
+              style={{
+                transform: `rotate(${180 - degree}deg)`,
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
