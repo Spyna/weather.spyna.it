@@ -26,7 +26,7 @@ class WeatherService {
       this.weatherData = null;
     });
     try {
-      const response = await fetch(`/api?query=${this.location}&days10&aqi=no&alerts=no`);
+      const response = await fetch(`/api?query=${this.location}&days=10&aqi=no&alerts=no`);
 
       const body = await response.json();
       runInAction(() => {

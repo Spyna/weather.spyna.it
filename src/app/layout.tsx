@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { PT_Mono as Font } from "next/font/google";
 import "./globals.css";
 
-const font = Montserrat({ subsets: ["latin"], weight: ["200", "300", "400", "500", "700"] });
+const font = Font({ subsets: ["latin"], weight: ["400"] });
 const domain = process.env.DOMAIN ?? "https://weather.spyna.it/";
 const protocol = process.env.PROTOCOL ?? "https";
 
-const title = "Weather app";
-const description =
-  "Yet another shitty weather app, but in pink";
+const title = "Weather";
+const description = "Yet another shitty weather app, but in pink";
 const image = `${protocol}://${domain}/spyna-weather.png`;
 
 export const metadata: Metadata = {
@@ -24,7 +23,6 @@ export const metadata: Metadata = {
   manifest: "/assets/site.webmanifest",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <link
+        <link
           rel="apple-touch-icon"
           sizes="180x180"
           href="/assets/apple-touch-icon.png"

@@ -1,13 +1,13 @@
+import Image from "next/image";
+
 interface Props {
   icon: string;
   text: string;
-  current?: boolean;
   small?: boolean;
 }
 export default function Condition({
   icon,
   text,
-  current = true,
   small = false,
 }: Readonly<Props>) {
   return (
@@ -19,17 +19,12 @@ export default function Condition({
         alt={text}
         width={small ? 32 : 48}
         height={small ? 32 : 48}
+        className="me-2"
       />
       {!small && (
-        <small>
+        <span>
           {text}
-          {current && (
-            <>
-              {" "}
-              <br></br>(current)
-            </>
-          )}
-        </small>
+        </span>
       )}
     </div>
   );

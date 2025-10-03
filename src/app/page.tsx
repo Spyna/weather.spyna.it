@@ -1,4 +1,7 @@
 "use client";
+import { FaArrowUpLong } from "react-icons/fa6";
+import { SiAccuweather } from "react-icons/si";
+
 import Search from "./_components/Search";
 import Summary from "./_components/Summary";
 import Detail from "./Detail";
@@ -16,13 +19,14 @@ export default observer(function Home() {
       <Search />
       {weatherData && (
         <div className="bg-gradient-to-b from-pink-800 to-pink-600">
-          <Summary weather={weatherData} />
+          <Summary weather={weatherData} location={weatherService.location} />
           <Detail weather={weatherData} />
         </div>
       )}
       {!weatherData && (
         <div className="h-screen bg-gradient-to-b from-pink-800 to-pink-600">
           {loading && <Loader />}
+          {!loading && <Intro />}
         </div>
       )}
       {weatherData && <Forecast weather={weatherData} />}
@@ -30,3 +34,17 @@ export default observer(function Home() {
     </main>
   );
 });
+
+function Intro() {
+  return (
+    <section className="flex flex-col items-center justify-center py-40 text-white">
+      <FaArrowUpLong className="w-16 h-16 animate-bounce" />
+      <p>Select a place to start</p>
+      <div className="mt-20 flex flex-col items-center">
+        <SiAccuweather className="w-20 h-20" />
+        <h1 className="text-4xl font-bold">Weather</h1>
+        <p className="mt-4">Get the latest weather updates.</p>
+      </div>
+    </section>
+  );
+}

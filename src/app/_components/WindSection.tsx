@@ -10,7 +10,7 @@ interface Props {
   icon?: boolean;
 }
 
-export default function WindSection({
+export default function Wind({
   speed,
   direction,
   degree,
@@ -19,12 +19,9 @@ export default function WindSection({
 }: Readonly<Props>) {
   return (
     <div
-      className={
-        "flex p-1" +
-        (small
-          ? " items-center"
-          : "  p-2 m-1 flex-col nm-concave-pink-700 rounded-lg")
-      }
+      className={`flex items-center ${
+        small ? "" : " space-x-4 p-4 nm-concave-pink-700 rounded-lg"
+      }`}
     >
       {!small && (
         <div>
@@ -39,7 +36,7 @@ export default function WindSection({
       <div>{speed} km/h</div>
       <div className="m-1">
         <div>
-          {!small && <span>{direction} </span>}
+          <span>{direction}</span>
           {degree && (
             <ArrowLongUpIcon
               className="w-5 h-5 inline-block"

@@ -27,8 +27,8 @@ export default observer(function Search() {
   }, []);
 
   return (
-    <form onSubmit={onSubmitListener}>
-      <div className="flex p-2 bg-pink-800">
+    <form onSubmit={onSubmitListener} className="">
+      <div className="flex p-4 nm-concave-pink-700 border-b border-b-pink-900 shadow-lg">
         <label
           htmlFor="search-dropdown"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -89,7 +89,7 @@ export default observer(function Search() {
           <input
             type="search"
             id="search-dropdown"
-            className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-pink-500"
+            className="block text-xl p-2 w-full z-20 text-gray-900 bg-gray-50 rounded-e-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-pink-500"
             placeholder="City"
             required
             value={current}
@@ -97,7 +97,7 @@ export default observer(function Search() {
           />
           <button
             type="submit"
-            className="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-pink-700 rounded-e border border-pink-700 hover:bg-pink-800 "
+            className="absolute top-0 end-0 p-3 h-full text-sm font-medium text-white bg-pink-500 rounded-e border border-pink-500 hover:bg-pink-800 "
           >
             <MagnifyingGlassIcon className="w-5 h-5" />
           </button>
