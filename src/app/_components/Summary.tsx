@@ -50,7 +50,7 @@ function ChancheOfRain({ weather }: Readonly<WithWeather>) {
         alt={`chance of raining: ${weather.forecast.forecastday[0].day.daily_chance_of_rain}%`}
       />{" "}
       <div className="text-center">
-        <small>Chance of rain: </small>
+        <small>Rain?</small>
         <br></br>
         <span className="text-lg font-medium">
           {weather.forecast.forecastday[0].day.daily_chance_of_rain}%
@@ -72,7 +72,7 @@ function Temperature({ weather }: Readonly<WithWeather>) {
             </span>
           </small>
         </p>
-        <span className="text-7xl">{weather.current.temp_c}&deg;</span>
+        <span className="text-4xl 2xl:text-7xl">{weather.current.temp_c}&deg;</span>
         <span className="text-3xl -mt-7 inline-block">C</span>
       </div>
       <small>Feels like {weather.current.feelslike_c}&deg;</small>
