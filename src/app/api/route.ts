@@ -1,51 +1,52 @@
 export const dynamic = "force-dynamic"; // defaults to auto
 import { request } from "undici";
-import response from "./response.json";
 import { createClient } from "@/utils/supabase/server";
+import { Forecast } from "@/types/Entities";
+import dayjs from "dayjs";
 
 function getUserIP(req: Request): string {
   // Try different headers for IP address
-  const forwarded = req.headers.get('x-forwarded-for');
+  const forwarded = req.headers.get("x-forwarded-for");
   if (forwarded) {
-    return forwarded.split(',')[0].trim();
+    return forwarded.split(",")[0].trim();
   }
-  
-  const realIP = req.headers.get('x-real-ip');
+
+  const realIP = req.headers.get("x-real-ip");
   if (realIP) {
     return realIP;
   }
-  
-  const cfConnectingIP = req.headers.get('cf-connecting-ip');
+
+  const cfConnectingIP = req.headers.get("cf-connecting-ip");
   if (cfConnectingIP) {
     return cfConnectingIP;
   }
-  
+
   // Fallback to a default location if no IP can be determined
-  return 'auto:ip';
+  return "auto:ip";
 }
 
 export async function GET(req: Request) {
   const key = process.env.WEATHER_API_KEY;
   const { searchParams } = new URL(req.url);
   let query = searchParams.get("query");
-  
-  // Se query è null o stringa vuota, utilizza l'indirizzo IP dell'utente
-  if (!query || query.trim() === '') {
+
+  if (!query || query.trim() === "") {
     query = getUserIP(req);
   }
 
-
   const supabase = await createClient();
-  const { data: forecast } = await supabase
+  const { data } = await supabase
     .from("forecast")
     .select()
     .eq("location", query.toLowerCase())
     .limit(1)
     .single();
 
-  if (forecast) {
-    console.log("Using cached forecast for", query);
-    return Response.json(forecast.forecast);
+  const forecast: Forecast | null = data || null;
+
+  if (isFresh(forecast)) {
+    console.log(`Using cached forecast for [${query}] - created at (${forecast?.created_at})`);
+    return Response.json(forecast!.forecast);
   }
 
   const { body } = await request(
@@ -60,9 +61,18 @@ export async function GET(req: Request) {
   const { error } = await supabase
     .from("forecast")
     .insert({ location: query.toLowerCase(), forecast: response });
+
   if (error) {
     console.log("Error inserting forecast", error);
   }
 
   return Response.json(response);
+}
+
+function isFresh(forecast: Forecast | null): boolean {
+  if (!forecast) {
+    return false;
+  }
+  const sixHoursAgo = dayjs().subtract(6, "hour").toDate();
+  return dayjs(forecast.created_at).isAfter(sixHoursAgo);
 }

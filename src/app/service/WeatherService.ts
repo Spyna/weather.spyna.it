@@ -1,5 +1,5 @@
 import { makeObservable, observable, runInAction } from "mobx";
-import { Weather } from "./weatherData";
+import { Weather } from "../../types/weatherData";
 
 class WeatherService {
   location: string = "";

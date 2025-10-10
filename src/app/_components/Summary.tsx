@@ -3,7 +3,10 @@ import Wind from "./WindSection";
 import Condition from "./Condition";
 import umbrella from "./umbrella.svg";
 import Image from "next/image";
-import { Weather } from "../service/weatherData";
+import { Weather } from "../../types/weatherData";
+import Location from "./Locations/Location";
+import { storageService } from "../service/StorageService";
+import { observer } from "mobx-react-lite";
 
 interface WithWeather {
   weather: Weather;
@@ -13,11 +16,17 @@ interface SummaryProps {
   location: string;
 }
 
-export default function Summary({ weather, location }: Readonly<SummaryProps>) {
+export default observer(function Summary({
+  weather,
+  location,
+}: Readonly<SummaryProps>) {
   return (
     <section className="p-4">
       <h2 className="text-white">
-        <strong className="text-xl">{location}</strong>
+        <Location
+          location={storageService.getByName(location)}
+          storageService={storageService}
+        />
         <br></br>
         <small>
           {dayjs(weather.location.localtime).format("dddd, MMMM D, YYYY")}
@@ -37,7 +46,7 @@ export default function Summary({ weather, location }: Readonly<SummaryProps>) {
       </div>
     </section>
   );
-}
+});
 
 function ChancheOfRain({ weather }: Readonly<WithWeather>) {
   return (
@@ -72,7 +81,9 @@ function Temperature({ weather }: Readonly<WithWeather>) {
             </span>
           </small>
         </p>
-        <span className="text-4xl 2xl:text-7xl">{weather.current.temp_c}&deg;</span>
+        <span className="text-4xl 2xl:text-7xl">
+          {weather.current.temp_c}&deg;
+        </span>
         <span className="text-3xl -mt-7 inline-block">C</span>
       </div>
       <small>Feels like {weather.current.feelslike_c}&deg;</small>

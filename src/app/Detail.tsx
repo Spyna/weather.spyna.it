@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import Condition from "./_components/Condition";
 import Wind from "./_components/WindSection";
-import { Hour, Weather } from "./service/weatherData";
+import { Hour, Weather } from "../types/weatherData";
 
 interface Props {
   weather: Weather;

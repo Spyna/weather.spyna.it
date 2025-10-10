@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Forecastday, Weather } from "../service/weatherData";
+import { Forecastday, Weather } from "../../types/weatherData";
 import Condition from "./Condition";
 import Wind from "./WindSection";
 

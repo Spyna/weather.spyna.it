@@ -1,6 +1,6 @@
 import { makeObservable, observable, runInAction } from "mobx";
 
-interface Location {
+export interface Location {
   location: string;
   default?: boolean;
 }
@@ -45,6 +45,10 @@ class StorageService {
       this.locations = [{ location, default: false }, ...this.locations];
     });
     this.store.save("locations", this.locations);
+  }
+
+  getByName(location: string) {
+    return this.locations.find((l) => l.location === location);
   }
 }
 

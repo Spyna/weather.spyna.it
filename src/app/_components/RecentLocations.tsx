@@ -1,7 +1,7 @@
-import { StarIcon } from "@heroicons/react/24/solid";
-import { StarIcon as StarIconEmpty } from "@heroicons/react/24/outline";
+
 import { storageService } from "../service/StorageService";
 import { observer } from "mobx-react-lite";
+import Location from "./Locations/Location";
 
 export default observer(function RecentLocations() {
   const { locations } = storageService;
@@ -12,23 +12,7 @@ export default observer(function RecentLocations() {
         <div>
           <h2 className="text-xl">Recent locations</h2>
           {locations.map((l) => (
-            <div
-              className="p-3 border-b flex justify-between items-center"
-              key={l.location}
-            >
-              {l.location}
-              <button
-                type="button"
-                className="border rounded-full p-2"
-                onClick={() => storageService.setDefault(l)}
-              >
-                {l.default ? (
-                  <StarIcon className="w-5 h-5" />
-                ) : (
-                  <StarIconEmpty className="w-5 h-5" />
-                )}
-              </button>
-            </div>
+            <Location key={l.location} location={l} storageService={storageService} />
           ))}
         </div>
       )}

@@ -11,6 +11,9 @@ import Loader from "@/component/ui/Loader/Loader";
 import RecentLocations from "./_components/RecentLocations";
 import Forecast from "./_components/Forecast";
 
+export const dynamic = "force-dynamic";
+
+
 export default observer(function Home() {
   const { weatherData, loading } = weatherService;
 
